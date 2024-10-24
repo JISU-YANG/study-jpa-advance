@@ -4,19 +4,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
-public class User {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> orderList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "food_id")
+    private Food food;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
